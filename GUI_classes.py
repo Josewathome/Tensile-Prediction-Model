@@ -6,6 +6,9 @@ from sklearn.preprocessing import StandardScaler
 import tkinter as tk
 from tkinter import ttk
 from model import TensileStrength
+from torch.utils.data import Dataset, DataLoader
+from torch import nn, optim
+
 class DataCollection:
     def __init__(self, master):
         self.master = master
@@ -103,7 +106,7 @@ class DataCollection:
         # Make a prediction
         with torch.no_grad():
             inputs = torch.tensor(normalized_features, dtype=torch.float)
-            outputs = model(inputs)
+            outputs = model.forward(inputs)
             
         # Create a label to display the predicted tensile strength
         self.prediction_label = ttk.Label(self.master, text="")
